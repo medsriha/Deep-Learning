@@ -3,9 +3,7 @@
 
 import matplotlib
 matplotlib.use("svg")
-# AUTOLAB_IGNORE_START
 get_ipython().run_line_magic('matplotlib', 'inline')
-# AUTOLAB_IGNORE_STOP
 import matplotlib.pyplot as plt
 plt.style.use("ggplot")
 import numpy as np
