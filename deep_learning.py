@@ -1,9 +1,6 @@
 
 # coding: utf-8
 
-# In[1]:
-
-
 import matplotlib
 matplotlib.use("svg")
 # AUTOLAB_IGNORE_START
