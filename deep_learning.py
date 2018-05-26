@@ -267,57 +267,8 @@ def fnames_to_features(fnames, vgg):
 fnames_to_features(fnames_tr[:10], truncated_vgg)
 
 
-
-# ## And now we wait... just kidding. 
 # Now, you can run this on the entirety of the training, validation, and test set... 
-# but wait. Our machines take about 2 seconds per example to generate VGG examples without any GPU acceleration,
+# My machines take about 2 seconds per example to generate VGG examples without any GPU acceleration,
 # which means that processing all the images will be a several hour endeavor (about 8 hours on my machines)! 
-# To save you some time, we've already run this on a random training and validation set (2k examples each), 
-# in X_tr.txt and y_va.txt. You can find their labels in y_tr.txt and y_va.txt. 
-
-
-
-#----------------------------
-X_tr = np.loadtxt("X_tr.txt")
-X_va = np.loadtxt("X_va.txt")
-
-
-# ------------------------------
-y_tr = np.loadtxt("y_tr.txt", dtype=int)
-y_va = np.loadtxt("y_va.txt", dtype=int)
-
-
-# ## Pet breed classification from VGG features
-# 
-# And now for the final task: we will now classify the pets by breed using the generated VGG features. 
-# Our goal here is to get at least 50% classification accuracy on the pets dataset. We will be given the 4k random examples 
-# above to build our model (the train and validation datasets), and we will evaluate our model on a holdout test set. 
-# 
-# ### Baseline approach
-# 
-# The baseline approach here is to use yet another neural network. A simple network that isn't too large can train to about 55% 
-# accuracy in a minute on our machines. Try different configurations with different learners and architectures. 
-
-import time
-from sklearn import svm
-def predict_from_features(X, y, X_te):
-    """ Given labels and VGG features, predict the breed of the testing set. 
-    Args: 
-        X (numpy ndarray) : 2D array of VGG features, each row is a set of features for a single example
-        y (numpy ndarray) : 1D array of labels corresponding to the features in X
-        X_te (numpy ndarray) : 2D array of VGG features for unlabeled examples
-    Returns: 
-        (numpy ndarray) 1D array of predicted labels for the unlabeled examples in X_te
-    """
-    clf = svm.SVC(kernel='linear')
-    clf.fit(X, y) 
-    y_pred = clf.predict(X_te)
-    return y_pred
-    pass
-
-# ------------------------------
-start = time.time()
-y_p = predict_from_features(X_tr, y_tr, X_va)
-end = time.time()
-print("Validation accuracy: {} in {} seconds".format(np.mean(y_p==y_va), end-start))
+# try it with 2k random images 
 
